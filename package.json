@@ -21,5 +21,8 @@
   "homepage": "https://github.com/RomanNikitchenko/goit-nodejs-hw-01#readme",
   "devDependencies": {
     "nodemon": "^2.0.19"
+  },
+  "dependencies": {
+    "uuid": "^8.3.2"
   }
 }

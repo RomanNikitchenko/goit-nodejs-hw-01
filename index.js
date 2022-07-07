@@ -1,32 +1,50 @@
-const contactsOperations = require("./db");
+const contactsOperations = require('./db');
 
-// index.js
-// const argv = require('yargs').argv;
-
-// TODO: рефакторить
 const invokeAction = async ({ action, id, name, email, phone }) => {
   switch (action) {
     case 'list':
-        const contacts = await contactsOperations.getAll();
-        console.log(contacts);
+      const contacts = await contactsOperations.getAll();
+      console.log(contacts);
       break;
 
     case 'get':
-      // ... id
+      const contact = await contactsOperations.getById(id);
+      if (!contact) {
+        throw new Error(`Contact with id=${id} not found`);
+      }
+      console.log(contact);
       break;
 
     case 'add':
-      // ... name email phone
+      const newContact = await contactsOperations.add(name, email, phone);
+      console.log(newContact);
       break;
 
     case 'remove':
-      // ... id
+      const remuveContact = await contactsOperations.remuveById(id);
+      console.log(remuveContact);
       break;
 
     default:
       console.warn('\x1B[31m Unknown action type!');
   }
-}
+};
 
-// invokeAction(argv);
-invokeAction({action: 'list'});
+// list
+// invokeAction({ action: 'list' });
+
+// get
+// const id = '1';
+// invokeAction({ action: 'get', id });
+
+// add
+// const newData = {
+//   name: 'Roman',
+//   email: 'nikitchenkoroman25@gmail.com',
+//   phone: 123123123123,
+// };
+// invokeAction({ action: 'add', ...newData });
+
+// remove
+// const id = '1';
+// invokeAction({ action: 'remove', id });
